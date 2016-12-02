@@ -3,7 +3,45 @@
 This is my first try using the source-2-image tool to get a skeleton django up 
 and running.
 
-### Some Notes
+## Steps to create
+
+These steps were done on a mac
+Prerequisites:
+* Python 3.5 installed
+* Docker for Mac installed
+
+### Setup base directory and virtualenv
+```sh
+mkdir first-s2i-python-app
+cd first-s2i-python-app
+virtualenv ve
+```
+
+### Install Django and Gunicorn and requirements
+```sh
+pip install Django Gunicorn
+pip freeze > requirements.txt
+```
+
+### Start the Django project and move some key files around
+```sh
+django-admin startproject helloworld .
+mv helloworld/wsgi.py .
+```
+See Notes below as to why we move the wsgi.py file around
+
+### Create s2i images
+```sh
+s2i build . centos/python-35-centos7 first-s2i-python-app-image
+```
+
+### Run newly created image
+```sh
+docker run -p 8080:8080 first-s2i-python-app-image
+```
+and then you should be able to see "It Worked!" if you load http://127.0.0.1:8080
+
+## Some Notes
 I have learned that to invoke some of automatic wiring of s2i for django projects, the 
 following files must be at the root of the git repo:
 * requirements.txt
