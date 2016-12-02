@@ -9,6 +9,7 @@ These steps were done on a mac
 Prerequisites:
 * Python 3.5 installed
 * Docker for Mac installed
+* s2i installed 
 
 ### Setup base directory and virtualenv
 ```sh
