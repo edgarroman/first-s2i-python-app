@@ -1,7 +1,22 @@
 # first-s2i-python-app
 
 This is my first try using the source-2-image tool to get a skeleton django up 
-and running
+and running.
+
+### Some Notes
+I have learned that to invoke some of automatic wiring of s2i for django projects, the 
+following files must be at the root of the git repo:
+* requirements.txt
+* manage.py
+* wsgi.py
+
+### Web Server
+
+Since we put the wsgi.py file at the root of the repo and we have specified Gunicorn in 
+the requirements.txt file, then when running the image, a default Gunicorn server is used.
+
+Had we not put either of the two prequisties in place, then s2i would have used `python manage.py runserver`
+to host the web application
 
 ## Helpful references
 
@@ -14,7 +29,7 @@ and running
 ### To build image
 
 ```sh
-s2i build ./helloworld centos/python-35-centos7 first-s2i-python-app-image
+s2i build . centos/python-35-centos7 first-s2i-python-app-image
 ```
 
 ### To run the django app using runserver
