@@ -88,3 +88,5 @@ ve/
 
 # Rope project settings
 .ropeproject
+
+.vscode
